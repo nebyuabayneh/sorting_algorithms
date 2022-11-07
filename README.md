@@ -46,8 +46,7 @@ $ make run MAIN=<name of main file to run>
 
 <details  style="user-select: none;">
 	<summary>
-		<strong style="user-select: none;cursor: pointer;">Adriana Echeverri</strong> - <a href="https://github.com/adri-er" target="_blank">Nebyuabayneh</a>
+		<strong style="user-select: none;cursor: pointer;">Nebyu Ababyneh</strong> - <a href="https://github.com/adri-er" target="_blank">Nebyuabayneh</a>
 	</summary>
 	<img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=adri-er&layout=compact&theme=vue&langs_count=6" alt="adri-er github stats"/>
 </details>
-s
