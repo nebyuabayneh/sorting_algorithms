@@ -1,83 +1,48 @@
 #include "sort.h"
 
 /**
- * insertion_array - insertion algorithm applied to an array.
- *
- * @array: array to sort with the algorithm.
- * @size: size of the array to sort.
- *
- * Return: Always void.
+ * swap_ints - Swap two integers in an array.
+ * @a: The first integer to swap.
+ * @b: The second integer to swap.
  */
-void insertion_array(int *array, size_t size)
+void swap_ints(int *a, int *b)
 {
-	int i, j, k;
+	int tmp;
 
-	for (i = 0; i < (int)size; i++)
-	{
-		k = i;
-		for (j = k - 1; j >= 0 && array[j] >= array[k];)
-		{
-			SWAP(array[j], array[k], int);
-			j--;
-			k--;
-		}
-	}
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 /**
- * insertion_array_gap - insertion algorithm applied to an array.
+ * shell_sort - Sort an array of integers in ascending
+ *              order using the shell sort algorithm.
+ * @array: An array of integers.
+ * @size: The size of the array.
  *
- * @array: array to sort with the algorithm.
- * @size: size of the array to sort.
- * @gap: size of the gap between changes.
- *
- * Return: Always void.
- */
-void insertion_array_gap(int *array, size_t size, int gap)
-{
-	int i;
-
-	if (gap > 1)
-	{
-		i = size - 1;
-		while (i - gap >= 0)
-		{
-			if (array[i] < array[i - gap])
-			{
-				SWAP(array[i], array[i - gap], int);
-			}
-			i--;
-		}
-		print_array((const int *)array, size);
-		gap = (gap - 1) / 3;
-		insertion_array_gap(array, size, gap);
-	}
-	else if (gap == 1)
-	{
-		insertion_array(array, size);
-		print_array((const int *)array, size);
-	}
-}
-
-/**
- * shell_sort - sort an array using shell algorithm.
- *
- * @array: array of integers to sort.
- * @size: size of the array to sort.
- *
- * Return: Always void.
+ * Description: Uses the Knuth interval sequence.
  */
 void shell_sort(int *array, size_t size)
 {
-	int gap = 1;
+	size_t gap, i, j;
 
 	if (array == NULL || size < 2)
-	{
 		return;
-	}
-	while (gap < ((int)size - 1) / 3)
-	{
+
+	for (gap = 1; gap < (size / 3);)
 		gap = gap * 3 + 1;
+
+	for (; gap >= 1; gap /= 3)
+	{
+		for (i = gap; i < size; i++)
+		{
+			j = i;
+			while (j >= gap && array[j - gap] > array[j])
+			{
+				swap_ints(array + j, array + (j - gap));
+				j -= gap;
+			}
+		}
+		print_array(array, size);
 	}
-	insertion_array_gap(array, size, gap);
 }
